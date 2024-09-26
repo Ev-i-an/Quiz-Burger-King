@@ -121,7 +121,7 @@ const questions = [
 ];
 
 const questionElement = document.getElementById("question");
-const answerButton = document.getElementById("answer-button");
+const answerButton = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
 
 let currentQuestionIndex = 0;
@@ -187,14 +187,14 @@ function handleNextButton(){
     if(currentQuestionIndex < questions.length){
         showQuestion();
     }else{
-        shwScore();
+        showScore();
     }
 }
 nextButton.addEventListener("click", ()=>{
     if(currentQuestionIndex < questions.length){
         handleNextButton();
     }else{
-        startQuiz();
+        showScore();
     }
 })
 
