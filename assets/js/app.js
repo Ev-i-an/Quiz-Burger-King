@@ -1,4 +1,3 @@
-// WHOPPER
 const questions = [
     {
         question: "Quelle est la composition du Whooper ?",
@@ -7,7 +6,7 @@ const questions = [
             {text: "CB5-moutarde-salade-tomates x2//oignon x3-ketchup-cornichon x4- Patty B", correct: false},
             {text: "CB5-mayonnaise-salade//oignon x2-ketchup-cornichon x4- Patty W", correct: false},
             {text: "CB5-moutarde-salade-tomates x2//oignon x3-ketchup-cornichon x2- Patty 150", correct: false},
-        ] 
+        ]
     },
     {
         question: "Quelle est l'élément ne se trouvant pas dans le Whooper ?",
@@ -16,7 +15,7 @@ const questions = [
             {text: "salade", correct: false},
             {text: "patty whopper", correct: false},
             {text: "fromage", correct: true},
-        ] 
+        ]
     },
     {
         question: "Quelle est l'élément se trouvant pas dans le Whooper ? II",
@@ -25,7 +24,7 @@ const questions = [
             {text: "salade", correct: false},
             {text: "patty whopper", correct: false},
             {text: "rondelles de cornichon x2", correct: true},
-        ] 
+        ]
     },
     {
         question: "Quelle est l'élément se trouvant pas dans le Whooper ? III",
@@ -34,7 +33,7 @@ const questions = [
             {text: "salade", correct: false},
             {text: "moutarde", correct: false},
             {text: "rondelles de cornichon x2", correct: true},
-        ] 
+        ]
     },
     {
         question: "Quel type de pain est utilisé pour le Whopper ?",
@@ -117,11 +116,10 @@ const questions = [
             {text: "Cornichon", correct: false},
         ]
     }
-    
 ];
 
 const questionElement = document.getElementById("question");
-const answerButton = document.getElementById("answer-buttons");
+const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
 
 let currentQuestionIndex = 0;
@@ -135,7 +133,8 @@ function startQuiz(){
 }
 
 function showQuestion(){
-    let currentQuestion = question[currentQuestionIndex];
+    resetState();
+    let currentQuestion = questions[currentQuestionIndex];
     let questionNo = currentQuestionIndex + 1;
     questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
 
@@ -143,9 +142,9 @@ function showQuestion(){
         const button = document.createElement("button");
         button.innerHTML = answer.text;
         button.classList.add("btn");
-        answerButton.appendChild(button);
+        answerButtons.appendChild(button);
         if(answer.correct){
-            button.datset.correct = answer.correct;
+            button.dataset.correct = answer.correct;
         }
         button.addEventListener("click", selectAnswer);
     });
@@ -178,10 +177,11 @@ function selectAnswer(e){
 
 function showScore(){
     resetState();
-    questionElement.innerHTML = `You scored ${score} out of {questions.length}!`;
+    questionElement.innerHTML = `You scored ${score} out of ${questions.length}!`;
     nextButton.innerHTML = "Rejouer ?";
     nextButton.style.display = "block";
 }
+
 function handleNextButton(){
     currentQuestionIndex++;
     if(currentQuestionIndex < questions.length){
@@ -190,16 +190,13 @@ function handleNextButton(){
         showScore();
     }
 }
+
 nextButton.addEventListener("click", ()=>{
     if(currentQuestionIndex < questions.length){
         handleNextButton();
     }else{
-        showScore();
+        startQuiz();
     }
 })
 
 startQuiz();
-
-////////////////////WHOPPER FIN/////////////////////////////////////////
-///////////////////// DOUBLE WHOPPER CHS /////////////////////////////////////
-
